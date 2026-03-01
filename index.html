@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛡️ Defence Holdings PLC (ALRT) — Private Investor Portal</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
+
+.header { background: linear-gradient(135deg, #0a1628, #0f2244); border-bottom: 2px solid #1f6feb; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.header-left { display: flex; align-items: center; gap: 14px; }
+.logo { font-size: 36px; }
+.header h1 { font-size: 22px; font-weight: 800; color: #58a6ff; }
+.header p { font-size: 12px; color: #8b949e; margin-top: 3px; }
+.header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn { padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; display: inline-block; }
+.btn-blue { background: #1f6feb; color: white; }
+.btn-ghost { background: transparent; color: #8b949e; border: 1px solid #30363d; }
+.live-badge { background: #0a1628; border: 1px solid #1f6feb; color: #58a6ff; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.status-dot { width: 7px; height: 7px; background: #58a6ff; border-radius: 50%; display: inline-block; margin-right: 5px; box-shadow: 0 0 5px #58a6ff; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; }
+.card.highlight { border-color: #1f6feb; }
+.card-header { padding: 13px 18px; border-bottom: 1px solid #30363d; display: flex; align-items: center; justify-content: space-between; }
+.card-header h2 { font-size: 13px; font-weight: 700; color: #f0f6fc; display: flex; align-items: center; gap: 7px; }
+.card-body { padding: 18px; }
+.card-link { font-size: 11px; color: #58a6ff; text-decoration: none; }
+.card-link:hover { text-decoration: underline; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat { background: #0d1117; border-radius: 8px; padding: 12px 14px; border: 1px solid #21262d; }
+.stat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #8b949e; }
+.stat .val { font-size: 22px; font-weight: 800; margin-top: 4px; }
+.stat .chg { font-size: 11px; margin-top: 3px; }
+.green { color: #3fb950; }
+.red { color: #f85149; }
+.yellow { color: #d29922; }
+.blue { color: #58a6ff; }
+.purple { color: #bc8cff; }
+.muted { color: #8b949e; }
+
+.big-stat { background: #0d1117; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #1f6feb; }
+.big-stat .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #8b949e; }
+.big-stat .val { font-size: 36px; font-weight: 900; color: #58a6ff; margin: 8px 0 4px; }
+.big-stat .sub { font-size: 12px; color: #8b949e; }
+
+.progress-wrap { margin: 8px 0; }
+.progress-label { display: flex; justify-content: space-between; font-size: 11px; color: #8b949e; margin-bottom: 5px; }
+.progress-bar { height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; }
+
+.news-item { padding: 11px 0; border-bottom: 1px solid #21262d; }
+.news-item:last-child { border-bottom: none; }
+.news-item .source { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #58a6ff; margin-bottom: 3px; }
+.news-item a { font-size: 13px; color: #e6edf3; line-height: 1.5; text-decoration: none; }
+.news-item a:hover { color: #58a6ff; }
+.news-item .meta { font-size: 11px; color: #8b949e; margin-top: 3px; }
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; margin-right: 4px; }
+.tag-green { background: #0d2b0d; color: #3fb950; border: 1px solid #238636; }
+.tag-blue { background: #0c2233; color: #58a6ff; border: 1px solid #1f6feb; }
+.tag-yellow { background: #2d2a00; color: #d29922; border: 1px solid #9e6a03; }
+.tag-purple { background: #1e0a3c; color: #bc8cff; border: 1px solid #6e40c9; }
+.tag-red { background: #1a0808; color: #f85149; border: 1px solid #6e1010; }
+
+.project-card { background: #0d1117; border-radius: 10px; padding: 16px; border: 1px solid #21262d; margin-bottom: 10px; }
+.project-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.project-card p { font-size: 12px; color: #8b949e; line-height: 1.6; }
+.project-card .tags { margin-top: 10px; }
+
+.links-col a { display: flex; align-items: center; gap: 8px; padding: 9px 12px; background: #0d1117; border: 1px solid #21262d; border-radius: 8px; text-decoration: none; color: #e6edf3; font-size: 12px; margin-bottom: 7px; transition: border-color 0.2s; }
+.links-col a:hover { border-color: #58a6ff; color: #58a6ff; }
+
+.insight-box { background: #0a1628; border: 1px solid #1f6feb; border-radius: 10px; padding: 16px 18px; font-size: 13px; line-height: 1.6; margin-top: 14px; }
+.insight-box strong { color: #58a6ff; }
+
+.disclaimer { text-align: center; padding: 16px 32px; color: #484f58; font-size: 11px; border-top: 1px solid #21262d; max-width: 1600px; margin: 0 auto; }
+
+@media (max-width: 1024px) { .col-3, .col-4 { grid-column: span 6; } .col-7, .col-8 { grid-column: span 12; } }
+@media (max-width: 768px) {
+  .grid { padding: 12px; gap: 10px; }
+  .col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8 { grid-column: span 12; }
+  .header { padding: 14px 16px; flex-direction: column; align-items: flex-start; }
+  .header h1 { font-size: 16px; }
+  .header-right { display: flex; flex-wrap: wrap; gap: 6px; }
+  .header-right .btn { font-size: 11px; padding: 5px 10px; }
+  .logo { font-size: 28px; }
+  .stat-grid { grid-template-columns: 1fr 1fr !important; }
+  .big-stat .val { font-size: 26px !important; }
+  .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .card-body { padding: 12px !important; }
+  [style*="border-right: 1px solid"],
+  [style*="border-right:1px solid"] { border-right: none !important; border-bottom: 1px solid #21262d !important; }
+  iframe { width: 100% !important; }
+  table { display: block; overflow-x: auto; white-space: nowrap; font-size: 11px !important; }
+  th, td { padding: 6px 8px !important; }
+  #fc-comments { max-height: 200px; }
+  [style*="grid-template-columns:1fr 1fr 1fr"] { display: flex !important; flex-direction: column !important; gap: 16px !important; }
+  .grid { padding: 10px !important; }
+  #comment-ribbon { flex-wrap: wrap; padding: 8px 12px; }
+  #comment-ribbon input { min-width: 0; font-size: 12px; }
+  #rns-content [style*="grid-template-columns: 1fr 1fr 1fr"] { display: block !important; }
+  .alrt-x-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- DEFENCE SECTOR TICKER TAPE -->
+<div style="background:#070d18;border-bottom:1px solid #21262d;">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        {"proName":"LSE:ALRT","title":"ALRT"},
+        {"proName":"LSE:BAE","title":"BAE Systems"},
+        {"proName":"LSE:QQ","title":"QinetiQ"},
+        {"proName":"NASDAQ:PLTR","title":"Palantir"},
+        {"proName":"NYSE:LMT","title":"Lockheed Martin"}
+      ],
+      "showSymbolLogo": true,
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "colorTheme": "dark",
+      "locale": "en"
+    }
+    </script>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">🛡️</div>
+    <div>
+      <h1>Defence Holdings PLC (ALRT) — Private Investor Portal</h1>
+      <p><span class="status-dot"></span>LSE: LON:ALRT &nbsp;·&nbsp; OTC: ALRDF &nbsp;·&nbsp; Sovereign AI · Drone Warfare · Cyber Defence &nbsp;·&nbsp; London, UK</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="live-badge">🔴 LIVE FEED</span>
+    <a href="https://t.me/+m6p7j7UervQ4OWY0" target="_blank" class="btn" style="background:#229ED9; color:#fff; border:1px solid #229ED9; font-weight:700;">✈️ Join Telegram</a>
+    <a href="https://www.defenceplc.com" target="_blank" class="btn" style="background:#1a2a4a; color:#58a6ff; border:1px solid #1f6feb;">🌐 Defence Holdings</a>
+    <a href="https://x.com/stuartw6040" target="_blank" class="btn" style="background:#000; color:white;">𝕏 @stuartw6040</a>
+    <a href="https://uk.advfn.com/stock-market/london/defence-ALRT/share-chat" target="_blank" class="btn btn-blue">LSE Chart ↗</a>
+    <a href="https://finance.yahoo.com/quote/ALRT.L/" target="_blank" class="btn btn-ghost">Yahoo Finance ↗</a>
+    <span class="btn btn-ghost" id="clock">--:--</span>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- LIVE PRICE CHART -->
+  <div class="col-8 card highlight">
+    <div class="card-header">
+      <h2>📈 LSE London — LON:ALRT (pence)</h2>
+      <a href="https://www.tradingview.com/symbols/LSE-ALRT/" target="_blank" class="card-link">TradingView ↗</a>
+    </div>
+    <div class="card-body" style="padding:0;">
+      <div style="height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#0d1117; gap:12px;">
+        <div style="font-size:13px; color:#8b949e; text-align:center;">Live interactive chart — opens in TradingView</div>
+        <a href="https://www.tradingview.com/symbols/LSE-ALRT/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#1f6feb;color:#fff;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;">📈 View LSE:ALRT Live Chart ↗</a>
+        <a href="https://uk.advfn.com/stock-market/london/defence-ALRT/share-price" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:8px 18px;border-radius:8px;font-size:12px;text-decoration:none;">📊 ADVFN Chart ↗</a>
+      </div>
+      <div style="padding: 10px 16px; display:flex; gap:20px; background:#0d1117; border-top:1px solid #21262d; flex-wrap:wrap; align-items:center;">
+        <div><div style="font-size:10px;color:#8b949e;text-transform:uppercase;">Last Close</div><div style="font-size:18px;font-weight:800;color:#58a6ff;">1.28p</div><div style="font-size:11px;color:#8b949e;">as at 1 Mar 2026</div></div>
+        <div style="width:1px;height:40px;background:#30363d;"></div>
+        <div><div style="font-size:10px;color:#8b949e;text-transform:uppercase;">52wk High</div><div style="font-size:18px;font-weight:800;color:#d29922;">4.80p</div><div style="font-size:11px;color:#8b949e;">−73% off highs</div></div>
+        <div style="width:1px;height:40px;background:#30363d;"></div>
+        <div><div style="font-size:10px;color:#8b949e;text-transform:uppercase;">52wk Low</div><div style="font-size:18px;font-weight:800;color:#f85149;">0.13p</div><div style="font-size:11px;color:#8b949e;">+885% off lows</div></div>
+        <div style="width:1px;height:40px;background:#30363d;"></div>
+        <div><div style="font-size:10px;color:#8b949e;text-transform:uppercase;">Shares</div><div style="font-size:18px;font-weight:800;color:#bc8cff;">2.43bn</div><div style="font-size:11px;color:#8b949e;">in issue</div></div>
+        <div style="width:1px;height:40px;background:#30363d;"></div>
+        <div><div style="font-size:10px;color:#8b949e;text-transform:uppercase;">Market Cap</div><div style="font-size:18px;font-weight:800;color:#3fb950;">~£31M</div><div style="font-size:11px;color:#8b949e;">@ 1.28p</div></div>
+        <div style="width:100%;font-size:11px;color:#484f58;margin-top:4px;">💡 Also tradeable OTC in the US: <strong style="color:#58a6ff;">ALRDF</strong> · Real-time chart above via TradingView · <a href="https://finance.yahoo.com/quote/ALRT.L/" target="_blank" style="color:#58a6ff;">Yahoo Finance ↗</a></div>
+      </div>
+
+      <!-- TECHNICAL ANALYSIS -->
+      <div style="background:#080f20;border-top:2px solid #1f6feb;padding:14px 18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="font-size:12px;font-weight:800;color:#58a6ff;text-transform:uppercase;letter-spacing:1px;">📐 Technical Analysis — LON:ALRT (Daily)</span>
+          <span style="font-size:10px;color:#8b949e;">Updated: 1 Mar 2026</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12px;">
+
+          <div>
+            <div style="color:#f85149;font-weight:700;margin-bottom:6px;">🔴 Resistance Levels</div>
+            <div style="line-height:2;color:#c9d1d9;">
+              <div style="display:flex;justify-content:space-between;"><span>R4 — 52wk High / Prev ATH</span><span style="color:#f85149;font-weight:700;">4.80p</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>R3 — Fib ext. 1.618</span><span style="color:#f85149;font-weight:700;">3.20p</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>R2 — Psych / Fib ext. 1.0</span><span style="color:#d29922;font-weight:700;">2.50p</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>R1 — Recent swing high</span><span style="color:#d29922;font-weight:700;">1.80p</span></div>
+              <div style="display:flex;justify-content:space-between;border-top:1px solid #21262d;padding-top:4px;"><span>● Current</span><span style="color:#58a6ff;font-weight:800;">1.28p</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="color:#3fb950;font-weight:700;margin-bottom:6px;">🟢 Support Levels</div>
+            <div style="line-height:2;color:#c9d1d9;">
+              <div style="display:flex;justify-content:space-between;"><span>S1 — Psych / Round number</span><span style="color:#3fb950;font-weight:700;">1.00p</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>S2 — Fib 38.2% retracement</span><span style="color:#3fb950;font-weight:700;">0.80p</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>S3 — Fib 50% / Mid-range</span><span style="color:#3fb950;font-weight:700;">0.60p</span></div>
+              <div style="display:flex;justify-content:space-between;"><span>S4 — 52wk Low / Floor</span><span style="color:#3fb950;font-weight:700;">0.13p</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="color:#58a6ff;font-weight:700;margin-bottom:6px;">📊 Signal Notes</div>
+            <div style="line-height:1.9;color:#c9d1d9;font-size:11px;">
+              <div style="margin-bottom:6px;">· <strong style="color:#58a6ff;">Trend:</strong> Spec-driven — highly volatile. Range trading between 0.13p–4.80p in 12 months</div>
+              <div style="margin-bottom:6px;">· <strong style="color:#d29922;">CEO catalyst:</strong> Andrew Roughan starts 30 March — potential re-rate event</div>
+              <div style="margin-bottom:6px;">· <strong style="color:#3fb950;">Volume watch:</strong> Low float + 2.43bn shares = any contract RNS could move price sharply</div>
+              <div>· <strong style="color:#f85149;">Caution:</strong> ATM facility dilutes share count — watch for warrant/share issuance</div>
+            </div>
+          </div>
+
+        </div>
+        <div style="margin-top:10px;padding:8px 12px;background:#060c18;border-radius:6px;border-left:3px solid #58a6ff;font-size:11px;color:#c9d1d9;line-height:1.8;">
+          · <strong style="color:#58a6ff;">Thesis:</strong> This is a pre-revenue early-stage defence tech company — price action is event-driven, not earnings-driven<br>
+          · <strong style="color:#58a6ff;">Key level:</strong> Hold above 1.00p = speculative support. Catalyst (first contract, CEO start) needed to break above 2.00p<br>
+          · <strong style="color:#d29922;">Watch 30 Mar 2026</strong> — Andrew Roughan starts as CEO. Likely first operational update. Potential price catalyst<br>
+          · <strong style="color:#f85149;">High risk:</strong> Binary outcomes — successful contract win vs continued dilution. Position size accordingly
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEY STATS SIDEBAR -->
+  <div class="col-4" style="display:flex;flex-direction:column;gap:16px;">
+    <div class="big-stat" style="border-color:#58a6ff;">
+      <div class="lbl">LON:ALRT</div>
+      <div class="val">1.28p</div>
+      <div class="sub">Last Close · 1 Mar 2026</div>
+    </div>
+    <div class="big-stat" style="border-color:#d29922;">
+      <div class="lbl">Market Cap</div>
+      <div class="val" style="color:#d29922;">~£31M</div>
+      <div class="sub">2.43bn shares @ 1.28p</div>
+    </div>
+    <div class="big-stat" style="border-color:#3fb950;">
+      <div class="lbl">Cash Position</div>
+      <div class="val" style="color:#3fb950;">£2.21M</div>
+      <div class="sub">Sept 2025 · ~18 months runway</div>
+    </div>
+    <div class="big-stat" style="border-color:#bc8cff;">
+      <div class="lbl">Next Catalyst</div>
+      <div class="val" style="color:#bc8cff; font-size:20px; padding-top:6px;">30 Mar 2026</div>
+      <div class="sub">CEO Andrew Roughan starts · Operational Update expected</div>
+    </div>
+  </div>
+
+  <!-- RNS INTEL DROPDOWN -->
+  <div class="col-12">
+    <div style="background:#070f1e; border:1px solid #1f6feb; border-radius:12px; overflow:hidden;">
+
+      <div onclick="toggleRNS()" style="cursor:pointer; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; user-select:none;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:13px; font-weight:700; color:#58a6ff;">📋 ALRT — RNS Intelligence · Key Milestones, Synopsis &amp; Roadmap</span>
+          <span style="background:#1f6feb; color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">LAST 12 MONTHS</span>
+        </div>
+        <span id="rns-chevron" style="color:#58a6ff; font-size:16px; transition:transform 0.3s;">▼</span>
+      </div>
+
+      <div id="rns-content" style="padding:0 20px 20px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:24px;">
+
+          <!-- COL 1: Key Milestones -->
+          <div>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#58a6ff; margin-bottom:12px; border-bottom:1px solid #0c2233; padding-bottom:6px;">⚡ Key Milestones</div>
+            <div style="font-size:12px; line-height:1.9; color:#c9d1d9;">
+              <div>📌 <strong style="color:#58a6ff">May 2025</strong> — Company rebranded from Cassell Capital PLC → Defence Holdings PLC</div>
+              <div>📌 <strong style="color:#58a6ff">Jul 2025</strong> — Readmitted to LSE Main Market as defence-focused business. Transition complete</div>
+              <div>📌 <strong style="color:#58a6ff">Oct 2025</strong> — Cross-listed on US OTC market (ticker: ALRDF). Oracle AI collaboration announced</div>
+              <div>📌 <strong style="color:#58a6ff">Oct 2025</strong> — Second classified AI product build confirmed · Hyperscale cloud provider selected</div>
+              <div>📌 <strong style="color:#58a6ff">Nov 2025</strong> — Oracle and Defence Technologies collaborate on sovereign-AI deployment</div>
+              <div>📌 <strong style="color:#58a6ff">Dec 22, 2025</strong> — Interim results: <strong>£2.21M cash · total assets £2.72M · liabilities just £78k</strong></div>
+              <div>📌 <strong style="color:#58a6ff">Dec 24, 2025</strong> — CEO appointment agreed (confirmed Feb 2026: Andrew Roughan)</div>
+              <div>📌 <strong style="color:#58a6ff">Dec 30, 2025</strong> — New National Security Pillar + <strong>Gloucestershire Police Proof-of-Value programme</strong></div>
+              <div>📌 <strong style="color:#58a6ff">Jan 22, 2026</strong> — Jim Clover OBE appointed to Advisory Board (senior UK defence figure)</div>
+              <div>📌 <strong style="color:#58a6ff">Feb 5, 2026</strong> — <strong>Andrew Roughan confirmed as CEO</strong> — effective 30 March 2026</div>
+              <div>📌 <strong style="color:#58a6ff">Feb 17, 2026</strong> — <strong>Sovereign Software Capability Accelerator launched</strong> + Project Ixian update</div>
+            </div>
+          </div>
+
+          <!-- COL 2: Synopsis -->
+          <div>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#3fb950; margin-bottom:12px; border-bottom:1px solid #1a3a1a; padding-bottom:6px;">📊 Synopsis</div>
+            <div style="font-size:12px; line-height:1.8; color:#c9d1d9;">
+              <p style="margin-bottom:10px;">Defence Holdings PLC is the UK's first listed pure-play defence software platform. Formerly Cassell Capital PLC, it pivoted to defence AI in 2025 and relisted on the LSE Main Market in July 2025.</p>
+              <p style="margin-bottom:10px;">The business model is a HoldCo structure: ALRT allocates capital, <strong style="color:#58a6ff;">Defence Technologies</strong> builds and deploys sovereign-AI products, and an acquisitions pipeline ("Buy-and-Build") adds capability.</p>
+              <p style="margin-bottom:10px;">Four product domains: <strong style="color:#58a6ff;">AI Agents</strong> (mission planning), <strong style="color:#d29922;">Drone Warfare</strong> (commercial drone aggregation), <strong style="color:#bc8cff;">Information Warfare</strong> (deepfake detection, disinformation), and <strong style="color:#3fb950;">Critical Infrastructure Defence</strong> (power grids, telecoms).</p>
+              <p>The company is <strong>pre-revenue from these products</strong> but has its first customer in <em>pre-contract pathway</em> (Project Ixian) and has deepened engagement with Gloucestershire Police, Oracle, and allied defence stakeholders. CEO Andrew Roughan (ex-Plexal, strong government/national security network) starts 30 March 2026.</p>
+            </div>
+            <div style="margin-top:12px; padding:10px 14px; background:#0a1628; border-radius:8px; border-left:3px solid #58a6ff; font-size:12px; color:#c9d1d9;">
+              <strong style="color:#58a6ff;">Interim Financials (6mo to 30 Sept 2025):</strong><br>
+              · Total assets: <strong>£2.72M</strong> (up from £77k)<br>
+              · Cash: <strong>£2.21M</strong> · Liabilities: £78k<br>
+              · Capital raised in period: <strong>£3.45M gross</strong><br>
+              · Board subscribed £350k — strong alignment<br>
+              · ATM facility: £620k raised via ongoing drip
+            </div>
+          </div>
+
+          <!-- COL 3: Roadmap -->
+          <div>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#d29922; margin-bottom:12px; border-bottom:1px solid #2d2a00; padding-bottom:6px;">🗺️ Roadmap &amp; Timeline</div>
+            <div style="font-size:12px; color:#c9d1d9;">
+
+              <div style="display:flex; gap:10px; margin-bottom:8px; padding:8px 10px; background:#0a1628; border-radius:6px; border-left:3px solid #58a6ff;">
+                <div style="min-width:80px; font-weight:700; color:#58a6ff;">Q1 2026<br><span style="font-size:10px;color:#8b949e;">NOW</span></div>
+                <div><strong style="color:#f85149;">🔥 30 Mar 2026 — Andrew Roughan starts as CEO</strong> · Project Ixian — first contract expected · Accelerator programme operational · Possible operational update RNS</div>
+              </div>
+
+              <div style="display:flex; gap:10px; margin-bottom:8px; padding:8px 10px; background:#1a1200; border-radius:6px; border-left:3px solid #d29922;">
+                <div style="min-width:80px; font-weight:700; color:#d29922;">Q2 2026</div>
+                <div>First commercial contract signed (Project Ixian expected) · Gloucestershire Police PoV outcome · Additional product launches · Potential new strategic partnerships · First revenue from defence products</div>
+              </div>
+
+              <div style="display:flex; gap:10px; margin-bottom:8px; padding:8px 10px; background:#140d1a; border-radius:6px; border-left:3px solid #bc8cff;">
+                <div style="min-width:80px; font-weight:700; color:#bc8cff;">H2 2026</div>
+                <div>Accelerator graduates first cohort · Acquisitions pipeline active (Buy-and-Build) · FY2026 annual results · Additional classified product deployments · MOD and NATO engagement progression</div>
+              </div>
+
+              <div style="display:flex; gap:10px; margin-bottom:8px; padding:8px 10px; background:#0c2233; border-radius:6px; border-left:3px solid #3fb950;">
+                <div style="min-width:80px; font-weight:700; color:#3fb950;">2027</div>
+                <div>Scale proven products · First acquisition completed · Revenue from multiple streams · Potential index inclusion · Profitability pathway emerging · Recurring defence contracts</div>
+              </div>
+
+              <div style="display:flex; gap:10px; padding:8px 10px; background:#0d2b0d; border-radius:6px; border-left:3px solid #3fb950;">
+                <div style="min-width:80px; font-weight:700; color:#3fb950;">2030</div>
+                <div><strong style="color:#3fb950;">5-Year Plan target:</strong> Diversified sovereign-AI platform · Multiple government and allied contracts · M&A-driven growth · Potential FTSE SmallCap or defence index inclusion</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div style="margin-top:14px; padding:8px 14px; background:#161b22; border-radius:8px; font-size:11px; color:#484f58; display:flex; justify-content:space-between;">
+          <span>Sources: LSE RNS · Investegate · Share Talk · Proactive Investors · defenceplc.com · AI Defence Journal · Mar 2026</span>
+          <a href="https://www.investegate.co.uk/company/ALRT" target="_blank" style="color:#58a6ff; text-decoration:none;">View all RNS ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEY DEFENCE RISKS & CATALYSTS -->
+  <div class="col-12">
+    <div class="card" style="border-color:#f85149;">
+      <div class="card-header" style="background:#150808;">
+        <h2 style="color:#f85149;">⚠️ Key Risks, Catalysts &amp; What's Priced In</h2>
+        <span style="font-size:11px;color:#8b949e;">Pre-revenue defence tech · Early stage · High risk / High reward · Spec position only</span>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;">
+
+          <!-- EXECUTION RISKS -->
+          <div style="padding:16px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#f85149;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #3d1111;">🔴 Execution Risks</div>
+            <div style="font-size:12px;line-height:1.8;color:#c9d1d9;">
+              <div style="margin-bottom:8px;"><span style="color:#f85149;font-weight:700;">CRITICAL</span> — <strong>Pre-revenue</strong><br><span style="color:#8b949e;">Products still in development/pre-contract. No recurring revenue from defence products. Company survives on capital raises and ATM facility.</span></div>
+              <div style="margin-bottom:8px;"><span style="color:#f85149;font-weight:700;">HIGH</span> — <strong>Cash runway</strong><br><span style="color:#8b949e;">£2.21M cash at Sept 2025. ATM facility provides ongoing dilutive financing. If contracts don't arrive, further dilution is likely. Burn rate vs runway is critical.</span></div>
+              <div style="margin-bottom:8px;"><span style="color:#f85149;font-weight:700;">HIGH</span> — <strong>Dilution risk</strong><br><span style="color:#8b949e;">2.43 billion shares already in issue. ATM facility and warrant exercises continue to increase share count. EPS accretion is distant.</span></div>
+              <div style="margin-bottom:8px;"><span style="color:#d29922;font-weight:700;">MED</span> — <strong>Contract delays</strong><br><span style="color:#8b949e;">Government procurement is notoriously slow. Project Ixian has been "in pre-contract pathway" for months. Timelines could slip significantly.</span></div>
+              <div><span style="color:#d29922;font-weight:700;">MED</span> — <strong>Competition</strong><br><span style="color:#8b949e;">Palantir, BAE Systems, Thales, QinetiQ all competing for UK/NATO AI defence contracts with far greater resources and established relationships.</span></div>
+            </div>
+          </div>
+
+          <!-- SECTOR / MACRO RISKS -->
+          <div style="padding:16px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#d29922;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2d2a00;">🟡 Sector &amp; Macro Risks</div>
+            <div style="font-size:12px;line-height:1.8;color:#c9d1d9;">
+              <div style="margin-bottom:8px;"><span style="color:#d29922;font-weight:700;">MED</span> — <strong>Security classification</strong><br><span style="color:#8b949e;">Working with classified defence systems limits what can be publicly disclosed. Investors may struggle to assess real progress. Information asymmetry is inherent.</span></div>
+              <div style="margin-bottom:8px;"><span style="color:#d29922;font-weight:700;">MED</span> — <strong>Regulatory / security clearance</strong><br><span style="color:#8b949e;">MOD and government work requires security clearances, vetting, and long procurement timelines. Any issue with management vetting could delay contracts.</span></div>
+              <div style="margin-bottom:8px;"><span style="color:#d29922;font-weight:700;">MED</span> — <strong>Geopolitical dependency</strong><br><span style="color:#8b949e;">Business case partially built on sustained defence spending increases. Any Ukraine peace deal or NATO budgetary pullback could dampen urgency for new capabilities.</span></div>
+              <div style="margin-bottom:8px;"><span style="color:#3fb950;font-weight:700;">LOW</span> — <strong>UK defence budget risk</strong><br><span style="color:#8b949e;">UK committed to 2.5% GDP defence spend. Strategic Defence Review underway. Direction of travel is firmly pro-software, pro-AI, pro-sovereign capability.</span></div>
+              <div><span style="color:#3fb950;font-weight:700;">LOW</span> — <strong>Technology obsolescence</strong><br><span style="color:#8b949e;">AI/drone tech evolves fast but ALRT's model (HoldCo acquirer + deployer) means it can pivot to new technologies. Not locked into single-product risk.</span></div>
+            </div>
+          </div>
+
+          <!-- WHAT'S PRICED IN -->
+          <div style="padding:16px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #0c2233;">📊 What's Priced In vs Not</div>
+            <div style="font-size:12px;color:#c9d1d9;">
+              <div style="margin-bottom:12px;padding:10px;background:#0d2b0d;border-radius:6px;border-left:3px solid #3fb950;">
+                <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">✅ Already Priced In</div>
+                <div style="line-height:1.8;">· Rebrand and relisting (done, absorbed)<br>· US OTC cross-listing (done, minor reaction)<br>· Oracle partnership (announced, no contract yet)<br>· CEO appointment process (widely flagged)<br>· ATM facility and dilution (ongoing, known)<br>· Early-stage balance sheet cleanup<br>· Gloucestershire Police PoV programme</div>
+              </div>
+              <div style="padding:10px;background:#150808;border-radius:6px;border-left:3px solid #f85149;">
+                <div style="font-weight:700;color:#f85149;margin-bottom:6px;">❗ NOT Priced In (Upcoming Risk/Reward)</div>
+                <div style="line-height:1.8;">· <strong style="color:#58a6ff;">Project Ixian — first contract signed</strong> → re-rating event<br>· Gloucestershire Police PoV result → expansion potential<br>· Andrew Roughan starts (30 Mar) → strategic clarity<br>· First acquisition (Buy-and-Build)<br>· MOD or NATO programme engagement disclosed<br>· Accelerator first cohort announcement<br>· Any security clearance / classified programme win</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WILSON'S CONTRACT VALUE MODEL -->
+          <div style="padding:16px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#bc8cff;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #1e0a3c;">🔬 Wilson's Contract Value Model</div>
+            <div style="font-size:11px;color:#8b949e;margin-bottom:10px;font-style:italic;">⚠️ Analyst estimate only — NOT company guidance. Speculative scenario analysis.</div>
+
+            <div style="font-size:12px;color:#c9d1d9;margin-bottom:10px;">
+              <strong style="color:#bc8cff;">Comparable UK Defence Tech Contracts:</strong><br>
+              · Palantir/NHS: £330M (AI analysis)<br>
+              · BAE/MOD AI programme: £500M+<br>
+              · Small-cap comparable: £2M–£20M initial<br>
+              · Police AI contracts: £500k–£5M per force
+            </div>
+
+            <div style="background:#1e0a3c;border-radius:8px;padding:12px;margin-bottom:10px;">
+              <div style="font-size:11px;font-weight:700;color:#bc8cff;margin-bottom:8px;">Revenue Scenarios (3-Year)</div>
+              <div style="font-size:12px;line-height:1.9;">
+                <div style="display:flex;justify-content:space-between;"><span>Bear (1–2 contracts)</span><span style="color:#f85149;">£1–3M ARR</span></div>
+                <div style="display:flex;justify-content:space-between;"><span>Base (3–5 contracts)</span><span style="color:#d29922;">£5–15M ARR</span></div>
+                <div style="display:flex;justify-content:space-between;"><span>Bull (MOD + expansion)</span><span style="color:#3fb950;">£20–50M ARR</span></div>
+                <div style="display:flex;justify-content:space-between;border-top:1px solid #6e40c9;margin-top:6px;padding-top:6px;font-weight:700;"><span>Implied P/S (base)</span><span style="color:#58a6ff;">2–6× Revenue</span></div>
+              </div>
+            </div>
+
+            <div style="font-size:12px;color:#c9d1d9;background:#0d1117;border-radius:6px;padding:10px;border-left:3px solid #bc8cff;">
+              <strong style="color:#bc8cff;">Wilson's Read:</strong> At £31M market cap, the market is pricing almost zero probability of success. A single meaningful MOD or police AI contract (£5M ARR) would justify <strong>£25–50M mkt cap</strong> at 5–10× SaaS/defence tech multiples. The risk/reward is asymmetric — but so is the execution risk. <span style="color:#f85149;">High risk, high reward.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAIR VALUE & P/S MULTIPLES -->
+  <div class="col-12">
+    <div class="card" style="border-color:#58a6ff;">
+      <div class="card-header" style="background:#080f20;">
+        <h2 style="color:#58a6ff;">💰 Fair Value — P/S &amp; Comparables · Wilson's Model</h2>
+        <span style="font-size:11px;color:#8b949e;">Pre-revenue defence tech — traditional PE/DCF not applicable. P/S, EV/Sales and scenario-based valuation used.</span>
+      </div>
+      <div class="card-body" style="padding:14px 18px;">
+
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:10px;">P/S Multiple Scenarios — LON:ALRT (pence) by Annual Revenue Run-Rate</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead>
+              <tr style="background:#0a1628;">
+                <th style="padding:8px 10px;text-align:left;color:#58a6ff;font-size:11px;border-bottom:1px solid #1f6feb;">Revenue Scenario</th>
+                <th style="padding:8px 10px;text-align:center;color:#8b949e;font-size:11px;border-bottom:1px solid #1f6feb;">ARR</th>
+                <th style="padding:8px 10px;text-align:center;color:#f85149;font-size:11px;border-bottom:1px solid #1f6feb;">P/S 3×<br>(pence / £M mkt cap)</th>
+                <th style="padding:8px 10px;text-align:center;color:#d29922;font-size:11px;border-bottom:1px solid #1f6feb;">P/S 5×<br>(pence / £M mkt cap)</th>
+                <th style="padding:8px 10px;text-align:center;color:#3fb950;font-size:11px;border-bottom:1px solid #1f6feb;">P/S 10×<br>(pence / £M mkt cap)</th>
+                <th style="padding:8px 10px;text-align:center;color:#8b949e;font-size:11px;border-bottom:1px solid #1f6feb;">vs 1.28p current</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #21262d;">
+                <td style="padding:8px 10px;color:#c9d1d9;">🐻 Bear — 1 small contract <span style="font-size:10px;color:#8b949e;">(2026)</span></td>
+                <td style="padding:8px 10px;text-align:center;color:#8b949e;">£2M</td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#f85149;font-weight:700;">0.25p</span><br><span style="color:#8b949e;font-size:10px;">£6M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#d29922;font-weight:700;">0.41p</span><br><span style="color:#8b949e;font-size:10px;">£10M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#3fb950;font-weight:700;">0.82p</span><br><span style="color:#8b949e;font-size:10px;">£20M</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:#f85149;">At market or below</td>
+              </tr>
+              <tr style="border-bottom:1px solid #21262d;background:#080f20;">
+                <td style="padding:8px 10px;color:#c9d1d9;">📊 Base — 3–5 contracts <span style="font-size:10px;color:#8b949e;">(2027)</span></td>
+                <td style="padding:8px 10px;text-align:center;color:#8b949e;">£10M</td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#f85149;font-weight:700;">1.24p</span><br><span style="color:#8b949e;font-size:10px;">£30M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#d29922;font-weight:700;">2.06p</span><br><span style="color:#8b949e;font-size:10px;">£50M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#3fb950;font-weight:700;">4.12p</span><br><span style="color:#8b949e;font-size:10px;">£100M</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:#d29922;">+61% to +222% at P/S 5–10×</td>
+              </tr>
+              <tr style="border-bottom:1px solid #21262d;">
+                <td style="padding:8px 10px;color:#c9d1d9;">🚀 Bull — MOD + NATO programme <span style="font-size:10px;color:#8b949e;">(2028+)</span></td>
+                <td style="padding:8px 10px;text-align:center;color:#8b949e;">£30M</td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#f85149;font-weight:700;">3.71p</span><br><span style="color:#8b949e;font-size:10px;">£90M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#d29922;font-weight:700;">6.18p</span><br><span style="color:#8b949e;font-size:10px;">£150M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#3fb950;font-weight:700;">12.36p</span><br><span style="color:#8b949e;font-size:10px;">£300M</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:#3fb950;">+383% to +866%</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 10px;color:#c9d1d9;">🌟 Moon — Scaled platform + M&amp;A <span style="font-size:10px;color:#8b949e;">(2030)</span></td>
+                <td style="padding:8px 10px;text-align:center;color:#8b949e;">£100M</td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#f85149;font-weight:700;">12.4p</span><br><span style="color:#8b949e;font-size:10px;">£300M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#d29922;font-weight:700;">20.6p</span><br><span style="color:#8b949e;font-size:10px;">£500M</span></td>
+                <td style="padding:8px 10px;text-align:center;"><span style="color:#3fb950;font-weight:700;">41.2p</span><br><span style="color:#8b949e;font-size:10px;">£1bn</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:#3fb950;">+1,500% to +3,100%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- COMPARABLE COMPANIES -->
+        <div style="margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#d29922;margin-bottom:10px;">🔍 Comparable Companies — Defence AI &amp; Sovereign Software</div>
+          <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;">
+              <thead>
+                <tr style="background:#1a1200;">
+                  <th style="padding:8px 10px;text-align:left;color:#d29922;font-size:11px;border-bottom:1px solid #9e6a03;">Company</th>
+                  <th style="padding:8px 10px;text-align:center;color:#8b949e;font-size:11px;border-bottom:1px solid #9e6a03;">Market</th>
+                  <th style="padding:8px 10px;text-align:center;color:#8b949e;font-size:11px;border-bottom:1px solid #9e6a03;">Mkt Cap</th>
+                  <th style="padding:8px 10px;text-align:center;color:#8b949e;font-size:11px;border-bottom:1px solid #9e6a03;">P/S</th>
+                  <th style="padding:8px 10px;text-align:center;color:#8b949e;font-size:11px;border-bottom:1px solid #9e6a03;">Focus</th>
+                  <th style="padding:8px 10px;text-align:left;color:#8b949e;font-size:11px;border-bottom:1px solid #9e6a03;">ALRT Relevance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid #21262d;">
+                  <td style="padding:7px 10px;color:#c9d1d9;font-weight:700;">Palantir (PLTR)</td>
+                  <td style="padding:7px 10px;text-align:center;color:#8b949e;">NASDAQ</td>
+                  <td style="padding:7px 10px;text-align:center;color:#3fb950;">$200bn+</td>
+                  <td style="padding:7px 10px;text-align:center;color:#d29922;">50–80×</td>
+                  <td style="padding:7px 10px;text-align:center;"><span class="tag tag-blue">AI/Data/Gov</span></td>
+                  <td style="padding:7px 10px;color:#8b949e;font-size:11px;">Aspirational peer — ALRT's Sovereign AI model mirrors PLTR's early-stage NATO pitch</td>
+                </tr>
+                <tr style="border-bottom:1px solid #21262d;background:#0a0e18;">
+                  <td style="padding:7px 10px;color:#c9d1d9;font-weight:700;">Sees.ai (AIM)</td>
+                  <td style="padding:7px 10px;text-align:center;color:#8b949e;">AIM</td>
+                  <td style="padding:7px 10px;text-align:center;color:#d29922;">£20–40M</td>
+                  <td style="padding:7px 10px;text-align:center;color:#d29922;">8–12×</td>
+                  <td style="padding:7px 10px;text-align:center;"><span class="tag tag-blue">Drone/Defence</span></td>
+                  <td style="padding:7px 10px;color:#8b949e;font-size:11px;">Close comparable — UK-listed, defence drone tech, similar market cap range</td>
+                </tr>
+                <tr style="border-bottom:1px solid #21262d;">
+                  <td style="padding:7px 10px;color:#c9d1d9;font-weight:700;">Vixio (AIM)</td>
+                  <td style="padding:7px 10px;text-align:center;color:#8b949e;">AIM</td>
+                  <td style="padding:7px 10px;text-align:center;color:#d29922;">£30–60M</td>
+                  <td style="padding:7px 10px;text-align:center;color:#3fb950;">5–8×</td>
+                  <td style="padding:7px 10px;text-align:center;"><span class="tag tag-yellow">Reg Tech/Gov</span></td>
+                  <td style="padding:7px 10px;color:#8b949e;font-size:11px;">Government/regulatory software on AIM — similar scale, recurring revenue model</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px 10px;color:#c9d1d9;font-weight:700;">QinetiQ (LSE)</td>
+                  <td style="padding:7px 10px;text-align:center;color:#8b949e;">LSE</td>
+                  <td style="padding:7px 10px;text-align:center;color:#3fb950;">£2bn+</td>
+                  <td style="padding:7px 10px;text-align:center;color:#d29922;">2–3×</td>
+                  <td style="padding:7px 10px;text-align:center;"><span class="tag tag-blue">MOD Services</span></td>
+                  <td style="padding:7px 10px;color:#8b949e;font-size:11px;">Established MOD partner — what ALRT aims to become. Scale target, not direct peer yet</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SCENARIO SUMMARY BOXES -->
+        <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
+          <div style="background:#150808;border:1px solid #6e1010;border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:#8b949e;text-transform:uppercase;margin-bottom:4px;">Bear (No contract)</div>
+            <div style="font-size:22px;font-weight:900;color:#f85149;">0.13–0.50p</div>
+            <div style="font-size:11px;color:#f85149;">Dilution drag</div>
+            <div style="font-size:10px;color:#8b949e;margin-top:3px;">−61% to −90%</div>
+          </div>
+          <div style="background:#1a1200;border:1px solid #9e6a03;border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:#8b949e;text-transform:uppercase;margin-bottom:4px;">Base (First Contract)</div>
+            <div style="font-size:22px;font-weight:900;color:#d29922;">2–5p</div>
+            <div style="font-size:11px;color:#d29922;">~6–12mo target</div>
+            <div style="font-size:10px;color:#8b949e;margin-top:3px;">+56% to +290%</div>
+          </div>
+          <div style="background:#0d2b0d;border:1px solid #238636;border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:#8b949e;text-transform:uppercase;margin-bottom:4px;">Bull (MOD Programme)</div>
+            <div style="font-size:22px;font-weight:900;color:#3fb950;">5–15p</div>
+            <div style="font-size:11px;color:#3fb950;">18–24mo target</div>
+            <div style="font-size:10px;color:#8b949e;margin-top:3px;">+290% to +1,072%</div>
+          </div>
+          <div style="background:#0a1628;border:2px solid #58a6ff;border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:#8b949e;text-transform:uppercase;margin-bottom:4px;">Wilson's View</div>
+            <div style="font-size:22px;font-weight:900;color:#58a6ff;">WATCHLIST</div>
+            <div style="font-size:11px;color:#58a6ff;">Wait for contract</div>
+            <div style="font-size:10px;color:#8b949e;margin-top:3px;">Enter on Ixian RNS</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;padding:8px 14px;background:#060c18;border-radius:6px;border-left:3px solid #58a6ff;font-size:11px;color:#c9d1d9;line-height:1.8;">
+          · At £31M market cap, this is <strong style="color:#58a6ff;">speculative</strong> — the market is pricing near-zero probability of meaningful revenue<br>
+          · If Project Ixian closes and even one modest government contract is won, re-rating from £31M to £60–100M is very plausible at 5–10× revenues<br>
+          · <strong style="color:#d29922;">Key watch:</strong> Andrew Roughan starts 30 March — his Plexal background means he arrives with an existing government/defence network. First operational update could be transformative<br>
+          · ⚠️ NOT financial advice — high-risk early-stage spec play only
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DEFENCE ETF SECTION -->
+  <div class="col-12">
+    <div class="card" style="border-color:#bc8cff;">
+      <div class="card-header" style="background:#0f0a1e;">
+        <h2 style="color:#bc8cff;">📦 Defence ETFs — Potential Future Inclusion &amp; Sector Context</h2>
+        <span style="font-size:11px;color:#8b949e;">Current status: Too small for ETF inclusion · Monitoring for future catalysts</span>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;">
+
+          <!-- HANetf NATO ETF -->
+          <div style="padding:18px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#bc8cff;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #1e0a3c;">🛡️ HANetf Future of Defence UCITS ETF (NATO)</div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+              <div style="background:#1e0a3c;border-radius:8px;padding:10px;text-align:center;">
+                <div style="font-size:10px;color:#8b949e;text-transform:uppercase;">LSE Ticker</div>
+                <div style="font-size:24px;font-weight:900;color:#bc8cff;">NATO</div>
+                <div style="font-size:10px;color:#8b949e;">London Stock Exchange</div>
+              </div>
+              <div style="background:#1e0a3c;border-radius:8px;padding:10px;text-align:center;">
+                <div style="font-size:10px;color:#8b949e;text-transform:uppercase;">Strategy</div>
+                <div style="font-size:13px;font-weight:900;color:#bc8cff;">NATO-aligned</div>
+                <div style="font-size:10px;color:#8b949e;">Defence & Security</div>
+              </div>
+            </div>
+
+            <div style="font-size:12px;line-height:1.8;color:#c9d1d9;margin-bottom:12px;">
+              <div style="margin-bottom:6px;">· HANetf's flagship defence ETF — tracks companies providing security innovation and defence capabilities</div>
+              <div style="margin-bottom:6px;">· <strong>Current</strong>: Holds large-cap defence: BAE, Rheinmetall, Leonardo, Thales, L3Harris</div>
+              <div style="margin-bottom:6px;">· ALRT <strong>too small currently</strong> (~£31M mkt cap vs typical £200M+ minimum threshold)</div>
+              <div>· <strong style="color:#bc8cff;">Future catalyst:</strong> If ALRT wins MOD/NATO contracts and mkt cap grows to £200M+, NATO ETF inclusion becomes possible</div>
+            </div>
+
+            <div style="background:#0d1117;border-radius:8px;padding:10px;font-size:11px;color:#8b949e;">
+              <strong style="color:#bc8cff;">NATO ETF Inclusion Criteria:</strong><br>
+              Primary revenue from defence/security · Minimum liquidity · UCITS-eligible domicile<br>
+              ALRT meets <em>strategic criteria</em> but not yet <em>size criteria</em>. Watch at £150M+ mkt cap.<br>
+              <a href="https://hanetf.com/fund/nato-future-of-defence-etf/" target="_blank" style="color:#58a6ff;">HANetf NATO ETF ↗</a>
+            </div>
+          </div>
+
+          <!-- iShares/SPDR Defence ETFs -->
+          <div style="padding:18px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #0c2233;">🇺🇸 US Defence ETFs — Sector Tailwinds</div>
+
+            <div style="font-size:12px;color:#c9d1d9;margin-bottom:14px;">
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #21262d;">
+                <div>
+                  <div style="font-weight:700;color:#e6edf3;">iShares U.S. Aerospace &amp; Defense (ITA)</div>
+                  <div style="font-size:11px;color:#8b949e;">NYSE ARCA · US defence primes</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:13px;font-weight:700;color:#58a6ff;">$7B+ AUM</div>
+                  <div style="font-size:10px;color:#8b949e;">Too large for ALRT</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #21262d;">
+                <div>
+                  <div style="font-weight:700;color:#e6edf3;">Invesco Aerospace &amp; Defense (PPA)</div>
+                  <div style="font-size:11px;color:#8b949e;">NYSE ARCA · Broad defence</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:13px;font-weight:700;color:#58a6ff;">$3B+ AUM</div>
+                  <div style="font-size:10px;color:#8b949e;">Too large for ALRT</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #21262d;">
+                <div>
+                  <div style="font-weight:700;color:#e6edf3;">SPDR S&amp;P Aerospace &amp; Defense (XAR)</div>
+                  <div style="font-size:11px;color:#8b949e;">NYSE ARCA · Equal weight defence</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:13px;font-weight:700;color:#58a6ff;">$2B+ AUM</div>
+                  <div style="font-size:10px;color:#8b949e;">Too large for ALRT</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;">
+                <div>
+                  <div style="font-weight:700;color:#e6edf3;">Global X Defence Tech ETF (SHLD)</div>
+                  <div style="font-size:11px;color:#8b949e;">NASDAQ · Tech-focused defence</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:13px;font-weight:700;color:#d29922;">$500M+ AUM</div>
+                  <div style="font-size:10px;color:#3fb950;">Potential longer-term</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#080f20;border:1px solid #1f6feb;border-radius:8px;padding:10px;font-size:11px;color:#c9d1d9;line-height:1.8;">
+              <strong style="color:#58a6ff;">Context:</strong> US OTC listing (ALRDF) gives exposure to North American investors and opens the door to smaller US defence-focused funds. Not near ETF inclusion criteria yet but the <em>sector tailwinds</em> are real — global defence spending at record highs.
+            </div>
+          </div>
+
+          <!-- ETF Catalyst Timeline & UK Backdrop -->
+          <div style="padding:18px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#d29922;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2d2a00;">🗺️ Path to ETF Inclusion &amp; UK Defence Backdrop</div>
+
+            <div style="font-size:11px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">ALRT ETF Inclusion Roadmap</div>
+            <div style="font-size:12px;color:#c9d1d9;margin-bottom:14px;">
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #21262d;">
+                <span style="color:#58a6ff;font-weight:700;">Now — £31M</span><span>Below all ETF thresholds</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #21262d;">
+                <span style="color:#d29922;font-weight:700;">£50–100M</span><span>Possible inclusion in micro-cap defence funds</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #21262d;">
+                <span style="color:#3fb950;font-weight:700;">£150–200M</span><span>HANetf NATO ETF threshold potential</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;">
+                <span style="color:#3fb950;font-weight:700;">£500M+</span><span>FTSE SmallCap / broader index inclusion</span>
+              </div>
+            </div>
+
+            <div style="font-size:11px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">UK Defence Spending Backdrop 🇬🇧</div>
+            <div style="background:#0d1117;border-radius:8px;padding:12px;font-size:12px;margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>UK Defence Budget 2025</span><span style="color:#3fb950;font-weight:700;">£59.6bn</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Commitment to 2.5% GDP</span><span style="color:#58a6ff;font-weight:700;">By 2030</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Strategic Defence Review</span><span style="color:#d29922;font-weight:700;">In Progress</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>NATO 2% target members</span><span style="color:#3fb950;font-weight:700;">All 32 (2025)</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid #30363d;margin-top:4px;"><span><strong>AI/Software Defence Share</strong></span><span style="color:#bc8cff;font-weight:800;">↑ Rapidly growing</span></div>
+            </div>
+
+            <div style="background:#150808;border:1px solid #f85149;border-radius:8px;padding:10px;font-size:12px;color:#c9d1d9;line-height:1.8;">
+              <strong style="color:#f85149;">Wilson's read:</strong> ETF inclusion is years away unless ALRT executes exceptionally fast. However, the <strong>sector tailwind is real</strong> — European nations rearmament, UK Strategic Defence Review favouring software and AI, NATO 2% commitment locked in. ALRT's market timing is excellent; execution is the risk.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHORT POSITIONS -->
+  <div class="col-12">
+    <div class="card" style="border-color:#f85149;">
+      <div class="card-header" style="background:#150808;">
+        <h2 style="color:#f85149;">🩳 Short Positions &amp; Float Analysis</h2>
+        <span style="font-size:11px;color:#8b949e;">FCA disclosed shorts ≥0.5% only · ALRT too small for institutional short interest</span>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;">
+
+          <!-- Current Shorts -->
+          <div style="padding:18px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#f85149;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #3d1111;">🇬🇧 LON:ALRT — Current Disclosed Shorts</div>
+
+            <div style="background:#0d2b0d;border:1px solid #238636;border-radius:8px;padding:12px;margin-bottom:14px;text-align:center;">
+              <div style="font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:0.5px;">Total Disclosed Short Interest</div>
+              <div style="font-size:40px;font-weight:900;color:#3fb950;margin:6px 0;">0.0%</div>
+              <div style="font-size:12px;color:#3fb950;">✅ No disclosed short positions</div>
+              <div style="font-size:11px;color:#484f58;margin-top:4px;">Market cap too small for institutional shorting<br>FCA threshold: ≥0.5% of shares in issue required for disclosure</div>
+            </div>
+
+            <div style="padding:10px;background:#0d1117;border-radius:8px;margin-bottom:8px;border-left:3px solid #3fb950;">
+              <div style="font-size:13px;font-weight:700;color:#e6edf3;">No Disclosed Shorts</div>
+              <div style="font-size:11px;color:#8b949e;margin-top:2px;">Company too small to attract institutional short sellers</div>
+              <div style="font-size:11px;color:#3fb950;margin-top:2px;">✅ No negative signal from this market</div>
+            </div>
+
+            <div style="padding:10px;background:#080f20;border-radius:8px;border-left:3px solid #58a6ff;">
+              <div style="font-size:13px;font-weight:700;color:#e6edf3;">ATM Facility — Dilution Watch</div>
+              <div style="font-size:11px;color:#8b949e;margin-top:2px;">£620k raised via ATM as at Dec 2025</div>
+              <div style="font-size:11px;color:#d29922;margin-top:2px;">⚠️ Ongoing dilution via share issuance is the real "short" risk here</div>
+            </div>
+
+            <div style="margin-top:12px;font-size:11px;color:#484f58;">Source: <a href="https://www.shorttracker.co.uk" target="_blank" style="color:#58a6ff;">ShortTracker UK ↗</a> · <a href="https://www.fca.org.uk/markets/short-selling/net-short-positions-reported-fca" target="_blank" style="color:#58a6ff;">FCA Short Positions ↗</a></div>
+          </div>
+
+          <!-- Share Structure Analysis -->
+          <div style="padding:18px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#d29922;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #2d2a00;">📊 Share Structure &amp; Capital Analysis</div>
+
+            <div style="background:#0d1117;border-radius:8px;padding:12px;font-size:12px;margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Shares in issue</span><span style="color:#e6edf3;font-weight:700;">2,426,792,946</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Par value per share</span><span style="color:#e6edf3;font-weight:700;">GBP 0.001</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>Market cap @ 1.28p</span><span style="color:#58a6ff;font-weight:700;">~£31M</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>52wk high mkt cap</span><span style="color:#d29922;font-weight:700;">~£116M</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>52wk low mkt cap</span><span style="color:#f85149;font-weight:700;">~£3.2M</span></div>
+              <div style="display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid #30363d;margin-top:4px;"><span>Capital raised (H1 FY26)</span><span style="color:#3fb950;font-weight:700;">£3.45M gross</span></div>
+            </div>
+
+            <canvas id="priceRangeChart" style="width:100%;max-height:180px;"></canvas>
+
+            <div style="margin-top:10px;padding:8px 10px;background:#0d1117;border-radius:6px;font-size:11px;color:#c9d1d9;line-height:1.8;">
+              · <strong style="color:#d29922;">Extreme volatility:</strong> 0.13p → 4.80p in 12 months = 3,592% range<br>
+              · <strong style="color:#d29922;">ATM facility:</strong> Dilutes gradually. Net new shares = downward pressure offset by positive news<br>
+              · <strong style="color:#3fb950;">Warrants exercised:</strong> Exercise at discount signals insider optimism · Sept–Dec 2025 multiple exercises<br>
+              · <strong style="color:#f85149;">Board alignment:</strong> Board subscribed £350k in period — positive insider signal
+            </div>
+          </div>
+
+          <!-- Key data links -->
+          <div style="padding:18px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#f85149;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #3d1111;">🔍 Live Data Sources</div>
+
+            <div class="links-col">
+              <a href="https://uk.advfn.com/stock-market/london/defence-ALRT/share-price" target="_blank">📊 ADVFN — ALRT Share Price (live)</a>
+              <a href="https://finance.yahoo.com/quote/ALRT.L/" target="_blank">📈 Yahoo Finance — ALRT.L</a>
+              <a href="https://www.hl.co.uk/shares/shares-search-results/d/defence-holdings-ord-gbp0.001" target="_blank">🏦 Hargreaves Lansdown — ALRT</a>
+              <a href="https://www.investegate.co.uk/company/ALRT" target="_blank">📄 Investegate — All ALRT RNS</a>
+              <a href="https://www.shorttracker.co.uk" target="_blank">🩳 ShortTracker UK</a>
+              <a href="https://www.fca.org.uk/markets/short-selling/net-short-positions-reported-fca" target="_blank">🏛️ FCA — Net Short Positions Register</a>
+            </div>
+
+            <div style="margin-top:14px;padding:10px 12px;background:#0a1628;border-radius:8px;border-left:3px solid #58a6ff;font-size:12px;color:#c9d1d9;line-height:1.8;">
+              <strong style="color:#58a6ff;">Wilson's read:</strong> No shorts is neutral — the stock is too small to borrow. The real risk is <strong>dilution via the ATM facility</strong> rather than short selling. Watch the share count at each announcement — if it's climbing faster than news is positive, be cautious.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYST TARGETS -->
+  <div class="col-12">
+    <div class="card" style="border-color:#58a6ff;">
+      <div class="card-header" style="background:#080f20;">
+        <h2 style="color:#58a6ff;">🎯 Analyst Coverage &amp; Community Targets</h2>
+        <span style="font-size:11px;color:#8b949e;">Updated: 1 Mar 2026 · No formal broker coverage found at time of writing</span>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;">
+
+          <!-- Formal Coverage -->
+          <div style="padding:18px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #0c2233;">🏦 Formal Broker Coverage</div>
+
+            <div style="background:#1a0808;border:1px solid #f85149;border-radius:8px;padding:14px;margin-bottom:14px;text-align:center;">
+              <div style="font-size:14px;font-weight:700;color:#f85149;margin-bottom:6px;">⚠️ No Formal Broker Coverage Found</div>
+              <div style="font-size:12px;color:#c9d1d9;line-height:1.7;">At time of writing, no disclosed institutional broker coverage has been found for Defence Holdings PLC (ALRT). This is typical for a newly-rebranded £31M market cap company at an early stage.</div>
+            </div>
+
+            <div style="font-size:12px;color:#c9d1d9;line-height:1.8;margin-bottom:12px;">
+              <div style="margin-bottom:6px;">· <strong style="color:#d29922;">Catalyst for coverage:</strong> First commercial contract (Project Ixian) would likely trigger first broker notes</div>
+              <div style="margin-bottom:6px;">· <strong style="color:#d29922;">Catalyst for coverage:</strong> CEO Andrew Roughan starts — new investor presentations expected</div>
+              <div style="margin-bottom:6px;">· <strong style="color:#3fb950;">Positive:</strong> Lack of coverage = information gap = early mover advantage for retail investors who do the work</div>
+              <div>· <strong style="color:#3fb950;">Comparable:</strong> Many AIM success stories had no coverage in early stages — Calnex, Sosandar, eg7</div>
+            </div>
+
+            <div style="background:#0d1117;border-radius:8px;padding:10px;font-size:11px;color:#8b949e;">
+              <strong style="color:#58a6ff;">Check yourself:</strong><br>
+              <a href="https://www.tipranks.com/stocks/gb:alrt/forecast" target="_blank" style="color:#58a6ff;">TipRanks ALRT ↗</a> ·
+              <a href="https://markets.ft.com/data/equities/tearsheet/summary?s=ALRT:LSE" target="_blank" style="color:#58a6ff;">FT Markets ↗</a> ·
+              <a href="https://www.investormeetcompany.com/companies/defence-holdings-plc/rns" target="_blank" style="color:#58a6ff;">Investor Meet Co. ↗</a>
+            </div>
+          </div>
+
+          <!-- Community / Retail Estimates -->
+          <div style="padding:18px;border-right:1px solid #30363d;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#d29922;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #2d2a00;">👥 Community &amp; Retail Scenario Targets</div>
+
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 0;border-bottom:1px solid #21262d;">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#e6edf3;">Bear Case</div>
+                <div style="font-size:11px;color:#8b949e;margin-top:2px;">No contract won · dilution continues · market de-rates</div>
+              </div>
+              <div style="text-align:right;min-width:80px;">
+                <div style="font-size:16px;font-weight:800;color:#f85149;">0.13–0.50p</div>
+                <div style="font-size:10px;padding:2px 6px;border-radius:10px;background:#1a0808;color:#f85149;margin-top:3px;">BEAR</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 0;border-bottom:1px solid #21262d;">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#e6edf3;">Base Case — Ixian signed</div>
+                <div style="font-size:11px;color:#8b949e;margin-top:2px;">First contract + CEO operational update</div>
+              </div>
+              <div style="text-align:right;min-width:80px;">
+                <div style="font-size:16px;font-weight:800;color:#d29922;">2–5p</div>
+                <div style="font-size:10px;padding:2px 6px;border-radius:10px;background:#2d2a00;color:#d29922;margin-top:3px;">BASE</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 0;border-bottom:1px solid #21262d;">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#e6edf3;">Bull Case — MOD/Police scale</div>
+                <div style="font-size:11px;color:#8b949e;margin-top:2px;">2–3 contracts, recurring revenue, broker coverage</div>
+              </div>
+              <div style="text-align:right;min-width:80px;">
+                <div style="font-size:16px;font-weight:800;color:#3fb950;">5–15p</div>
+                <div style="font-size:10px;padding:2px 6px;border-radius:10px;background:#0d2b0d;color:#3fb950;margin-top:3px;">BULL</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 0;">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#e6edf3;">Moon Case — Scaled platform</div>
+                <div style="font-size:11px;color:#8b949e;margin-top:2px;">£100M+ revenue · Palantir of UK government</div>
+              </div>
+              <div style="text-align:right;min-width:80px;">
+                <div style="font-size:16px;font-weight:800;color:#bc8cff;">20–50p</div>
+                <div style="font-size:10px;padding:2px 6px;border-radius:10px;background:#1e0a3c;color:#bc8cff;margin-top:3px;">MOON</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;background:#080f20;border:1px solid #1f6feb;border-radius:8px;padding:12px;">
+              <div style="font-size:11px;font-weight:700;color:#58a6ff;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">📊 Implied Return Summary</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;">
+                <div style="background:#0d1117;border-radius:6px;padding:8px;">
+                  <div style="font-size:10px;color:#8b949e;">BASE TARGET</div>
+                  <div style="font-size:18px;font-weight:800;color:#d29922;">2–5p</div>
+                </div>
+                <div style="background:#0d1117;border-radius:6px;padding:8px;">
+                  <div style="font-size:10px;color:#8b949e;">BULL TARGET</div>
+                  <div style="font-size:18px;font-weight:800;color:#3fb950;">5–15p</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wilson's View -->
+          <div style="padding:18px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #0c2233;">📈 Wilson's View &amp; Investment Signal</div>
+
+            <div style="background:#080f20;border-left:3px solid #58a6ff;border-radius:0 6px 6px 0;padding:12px;margin-bottom:12px;font-size:12px;color:#c9d1d9;line-height:1.8;">
+              <strong style="color:#58a6ff;">Core thesis:</strong> ALRT is a <strong>high-risk, early-stage binary bet</strong> on the UK's pivot to sovereign AI defence. The macro tailwind is unambiguously positive. The execution risk is very real. At £31M market cap, the option value is cheap — but it could go to zero if contracts don't materialise.
+            </div>
+
+            <div style="font-size:12px;color:#c9d1d9;line-height:1.9;margin-bottom:14px;">
+              <div style="margin-bottom:6px;">· <strong style="color:#3fb950;">Why interesting:</strong> First mover, LSE-listed, right sector, timing is perfect, new CEO with credible gov network</div>
+              <div style="margin-bottom:6px;">· <strong style="color:#d29922;">Why risky:</strong> Pre-revenue, ATM dilution, 2.43bn shares, no hard contracts yet, competing with giants</div>
+              <div style="margin-bottom:6px;">· <strong style="color:#58a6ff;">Entry signal:</strong> Wait for Project Ixian contract RNS. Don't chase the news — buy the fact when it arrives</div>
+              <div>· <strong style="color:#bc8cff;">Position size:</strong> Spec allocation only — not a core holding. Treat as a lottery ticket with asymmetric upside</div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:16px;">
+              <div style="background:#0a1628;border:2px solid #58a6ff;border-radius:8px;padding:14px;text-align:center;">
+                <div style="font-size:14px;font-weight:900;color:#58a6ff;margin-bottom:4px;">WATCHLIST</div>
+                <div style="font-size:12px;color:#c9d1d9;">Buy trigger: Project Ixian contract signed · CEO update positive · Price action > 2p on volume</div>
+              </div>
+            </div>
+
+            <div style="font-size:11px;color:#8b949e;line-height:1.8;">
+              <strong style="color:#58a6ff;">Catalysts to watch (2026):</strong><br>
+              🔥 30 Mar — Andrew Roughan starts (CEO)<br>
+              🔥 Project Ixian first contract RNS<br>
+              🔥 Gloucestershire Police PoV result<br>
+              🔥 Accelerator first cohort graduated<br>
+              📊 First acquisition announced (Buy-and-Build)<br>
+              📊 New MOD/NATO engagement disclosed<br>
+              📊 FY2026 annual results
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY METRICS -->
+  <div class="col-4 card highlight">
+    <div class="card-header">
+      <h2>📊 Key Metrics</h2>
+      <a href="https://finance.yahoo.com/quote/ALRT.L/" target="_blank" class="card-link">Yahoo Finance ↗</a>
+    </div>
+    <div class="card-body">
+      <div class="stat-grid">
+        <div class="stat"><div class="lbl">LSE Close</div><div class="val blue">1.28p</div><div class="chg muted">as at 1 Mar 2026</div></div>
+        <div class="stat"><div class="lbl">Market Cap</div><div class="val blue">~£31M</div><div class="chg muted">@ 1.28p</div></div>
+        <div class="stat"><div class="lbl">52wk High</div><div class="val yellow">4.80p</div><div class="chg red">−73% off high</div></div>
+        <div class="stat"><div class="lbl">52wk Low</div><div class="val green">0.13p</div><div class="chg green">+885% off low</div></div>
+        <div class="stat"><div class="lbl">Revenue FY25</div><div class="val yellow">£2.89M</div><div class="chg red">−48% YoY</div></div>
+        <div class="stat"><div class="lbl">Cash (Sept)</div><div class="val green">£2.21M</div><div class="chg green">~18mo runway</div></div>
+      </div>
+      <div style="margin-top: 14px;">
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Balance Sheet Health</span><span>Strong for stage</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:65%; background: #58a6ff;"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Product Delivery Progress</span><span>Early stage</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:30%; background: #d29922;"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Contract Pipeline (est.)</span><span>Pre-contract</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:20%; background: #bc8cff;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPABILITIES / PRODUCTS -->
+  <div class="col-4 card">
+    <div class="card-header">
+      <h2>🖥️ Product Domains &amp; Capabilities</h2>
+      <a href="https://www.defenceplc.com" target="_blank" class="card-link">defenceplc.com ↗</a>
+    </div>
+    <div class="card-body">
+      <div class="project-card">
+        <h3 class="blue">🤖 AI Agents — Mission Planning</h3>
+        <p>AI systems designed to plan missions, run digital simulations, optimise supply routes, and provide real-time operational recommendations. Target: reduce military planning costs by 30–40%.</p>
+        <div class="tags">
+          <span class="tag tag-blue">Sovereign AI</span>
+          <span class="tag tag-yellow">Early Stage</span>
+          <span class="tag tag-blue">MOD Target</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3 style="color:#bc8cff;">🔍 Information Warfare</h3>
+        <p>Deepfake detection, disinformation tracking, source attribution. Real-time solutions to distinguish truth from AI-generated content. First commercial customer: Gloucestershire Police (ROVI/ROTI AI).</p>
+        <div class="tags">
+          <span class="tag tag-purple">Live PoV</span>
+          <span class="tag tag-blue">Police/Gov</span>
+          <span class="tag tag-yellow">AI/ML</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3 class="yellow">🚁 Drone Warfare &amp; Aggregation</h3>
+        <p>Platform tech that networks commercial drones into unified defence systems. Turns off-the-shelf civilian drones into coordinated surveillance/operational assets. 100M+ civilian drones ready to aggregate.</p>
+        <div class="tags">
+          <span class="tag tag-yellow">Platform</span>
+          <span class="tag tag-blue">Dual-Use</span>
+          <span class="tag tag-green">NATO Aligned</span>
+        </div>
+      </div>
+      <div class="project-card" style="margin-bottom:0">
+        <h3 class="green">🏭 Critical Infrastructure Defence</h3>
+        <p>Protection systems for power grids, water, ports, telecoms. AI-powered threat detection, attack simulation, and automatic response. Insurance companies and new regulations driving demand.</p>
+        <div class="tags">
+          <span class="tag tag-green">CNI</span>
+          <span class="tag tag-blue">Cyber</span>
+          <span class="tag tag-yellow">Regulated</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATEST NEWS -->
+  <div class="col-4 card">
+    <div class="card-header">
+      <h2>📰 Latest News &amp; RNS</h2>
+      <a href="https://www.investegate.co.uk/company/ALRT" target="_blank" class="card-link">All RNS ↗</a>
+    </div>
+    <div class="card-body">
+      <div class="news-item">
+        <div class="source">RNS/PRN · 17 Feb 2026</div>
+        <a href="https://www.investegate.co.uk/announcement/prn/defence-holdings-plc--alrt/launches-sovereign-software-capability-accele-/9433630" target="_blank">Defence Holdings launches Sovereign Software Capability Accelerator + Project Ixian update</a>
+        <div class="meta">Investegate · <span class="tag tag-blue">Operational Update</span></div>
+      </div>
+      <div class="news-item">
+        <div class="source">RNS · 5 Feb 2026</div>
+        <a href="https://www.investegate.co.uk/announcement/rns/defence-holdings-plc--alrt/appointment-of-ceo-update-on-atm-and-pdmr/9410938" target="_blank">Andrew Roughan appointed CEO — effective 30 March 2026 · ex-Plexal, UK Gov science &amp; tech network</a>
+        <div class="meta">Investegate · <span class="tag tag-green">CEO Appointment</span></div>
+      </div>
+      <div class="news-item">
+        <div class="source">PRN · 22 Jan 2026</div>
+        <a href="https://www.investegate.co.uk/announcement/prn/defence-holdings-plc--alrt/defence-holdings-appoints-jim-clover-obe-to-a-/9376491" target="_blank">Jim Clover OBE joins Advisory Board — senior UK defence figure, strengthens MOD relationships</a>
+        <div class="meta">Investegate · <span class="tag tag-yellow">Advisory Board</span></div>
+      </div>
+      <div class="news-item">
+        <div class="source">PRN · 30 Dec 2025</div>
+        <a href="https://www.investegate.co.uk/announcement/prn/defence-holdings-plc--alrt/defence-holdings-announce-new-national-securi-/9323713" target="_blank">New National Security Pillar + Gloucestershire Police AI collaboration (ROVI/ROTI programme)</a>
+        <div class="meta">Investegate · <span class="tag tag-blue">Partnership</span></div>
+      </div>
+      <div class="news-item">
+        <div class="source">PRN · 22 Dec 2025</div>
+        <a href="https://www.investegate.co.uk/announcement/prn/defence-holdings-plc--alrt/operational-update-and-interim-results/9311594" target="_blank">Interim results: £2.21M cash · £2.72M total assets · Project Ixian in pre-contract pathway</a>
+        <div class="meta">Investegate · <span class="tag tag-yellow">Results</span></div>
+      </div>
+      <div class="news-item">
+        <div class="source">PRN · 6 Nov 2025</div>
+        <a href="https://www.investegate.co.uk/announcement/prn/defence-holdings-plc--alrt/oracle-and-defence-technologies-collaborate-t-/9216761" target="_blank">Oracle and Defence Technologies collaborate on sovereign-AI deployment in allied programmes</a>
+        <div class="meta">Investegate · <span class="tag tag-blue">Oracle Partnership</span></div>
+      </div>
+      <div class="insight-box">
+        <strong>💡 Signal:</strong> CEO starts 30 March. Project Ixian heading toward first contract. Oracle, Gloucestershire Police, Jim Clover OBE — the pieces are assembling. The question is whether it converts to revenue before the cash runs out.
+      </div>
+    </div>
+  </div>
+
+  <!-- X COMMUNITY -->
+  <div class="col-12 card">
+    <div class="card-header">
+      <h2>🐦 X Community — Key Accounts &amp; Feeds</h2>
+      <span style="font-size:11px;color:#8b949e;">Click any account to view their latest posts on X · Embedded timelines require hosting to display inline</span>
+    </div>
+    <div class="card-body" style="padding:14px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;" class="alrt-x-grid">
+
+        <!-- Official -->
+        <div style="background:#0d1117;border:1px solid #1f6feb;border-radius:10px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:10px;">🏢 Official</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://x.com/defenceholdings" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">@defenceholdings</div><div style="font-size:11px;color:#8b949e;">Official company account</div></div>
+              <span style="background:#1d9bf0;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">View ↗</span>
+            </a>
+            <a href="https://www.defenceplc.com" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">defenceplc.com</div><div style="font-size:11px;color:#8b949e;">Official website</div></div>
+              <span style="background:#1f6feb;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">Visit ↗</span>
+            </a>
+            <a href="https://www.investormeetcompany.com/companies/defence-holdings-plc/rns" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">Investor Meet Company</div><div style="font-size:11px;color:#8b949e;">Presentations &amp; RNS</div></div>
+              <span style="background:#1d9bf0;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">View ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Community Investors -->
+        <div style="background:#0d1117;border:1px solid #1f6feb;border-radius:10px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:10px;">👥 Community Investors</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://x.com/stuartw6040" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">@stuartw6040</div><div style="font-size:11px;color:#8b949e;">Stuart · Portal creator</div></div>
+              <span style="background:#1f6feb;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">You ↗</span>
+            </a>
+            <a href="https://x.com/search?q=%23ALRT+defence+holdings&f=live" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">#ALRT on X</div><div style="font-size:11px;color:#8b949e;">Live community discussion</div></div>
+              <span style="background:#1d9bf0;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">Search ↗</span>
+            </a>
+            <a href="https://uk.advfn.com/stock-market/london/defence-ALRT/share-chat" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">ADVFN Share Chat</div><div style="font-size:11px;color:#8b949e;">ALRT community forum</div></div>
+              <span style="background:#1d9bf0;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">View ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Defence Media -->
+        <div style="background:#0d1117;border:1px solid #6e40c9;border-radius:10px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#bc8cff;margin-bottom:10px;">📰 Defence &amp; Finance Media</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://x.com/ProactiveInvstrs" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">@ProactiveInvstrs</div><div style="font-size:11px;color:#8b949e;">LSE/AIM investor news</div></div>
+              <span style="background:#1d9bf0;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">View ↗</span>
+            </a>
+            <a href="https://x.com/AIMInvestors" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">@AIMInvestors</div><div style="font-size:11px;color:#8b949e;">AIM investor community</div></div>
+              <span style="background:#1d9bf0;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">View ↗</span>
+            </a>
+            <a href="https://aidefencejournal.com" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#161b22;border-radius:8px;padding:10px 12px;text-decoration:none;border:1px solid #30363d;">
+              <div><div style="font-weight:700;color:#e6edf3;font-size:13px;">AI Defence Journal</div><div style="font-size:11px;color:#8b949e;">ALRT coverage + analysis</div></div>
+              <span style="background:#bc8cff;color:white;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">Read ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Search ALRT hashtag on X -->
+        <div style="background:#0d1117;border:1px solid #1f6feb;border-radius:10px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#58a6ff;margin-bottom:10px;">🏷️ #ALRTPortal on X</div>
+          <div style="font-size:12px;color:#c9d1d9;line-height:1.8;margin-bottom:12px;">
+            All community posts tagged #ALRTPortal appear here. Post with the tag to share your thoughts with everyone using this portal.
+          </div>
+          <a href="https://x.com/search?q=%23ALRTPortal&f=live" target="_blank" style="display:block;text-align:center;background:#1f6feb;color:white;font-size:13px;font-weight:700;padding:10px;border-radius:8px;text-decoration:none;margin-bottom:8px;">🔍 View #ALRTPortal Live Feed ↗</a>
+          <a href="https://x.com/search?q=%23ALRT+%23defenceholdings&f=live" target="_blank" style="display:block;text-align:center;background:#161b22;color:#58a6ff;border:1px solid #1f6feb;font-size:12px;font-weight:700;padding:8px;border-radius:8px;text-decoration:none;margin-bottom:8px;">#ALRT #defenceholdings Live ↗</a>
+          <a href="https://twitter.com/intent/tweet?text=%23ALRTPortal%20%23ALRT%20" target="_blank" style="display:block;text-align:center;background:#1d9bf0;color:white;font-size:12px;font-weight:700;padding:8px;border-radius:8px;text-decoration:none;">✍️ Post with #ALRTPortal</a>
+        </div>
+
+      </div>
+      <div style="margin-top:10px;padding:8px 12px;background:#161b22;border-radius:6px;font-size:11px;color:#484f58;">
+        💡 Twitter/X embedded timelines require a hosted environment to display inline. <strong style="color:#8b949e;">Host on Netlify</strong> for live feeds inside the portal · Click any card above to view on X directly
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="disclaimer">
+  ⚠️ This dashboard is for informational purposes only. Not financial advice. Data sourced from public market information and news. Always do your own research.
+  <br>Last updated: 1 Mar 2026 · Prices may be delayed · Defence Holdings PLC (ALRT) is a high-risk, early-stage investment
+</div>
+
+<!-- RESOURCE LINKS BAR -->
+<div style="background:#060c18;border-top:1px solid #21262d;padding:24px 32px;">
+  <div style="max-width:1600px;margin:0 auto;">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8b949e;margin-bottom:16px;">🔗 Resources &amp; Quick Links</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+
+      <a href="https://uk.advfn.com/stock-market/london/defence-ALRT/share-price" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;">🛡️ ALRT — ADVFN</a>
+      <a href="https://finance.yahoo.com/quote/ALRT.L/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;">📊 Yahoo Finance</a>
+      <a href="https://www.hl.co.uk/shares/shares-search-results/d/defence-holdings-ord-gbp0.001" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;">🏦 Hargreaves Lansdown</a>
+      <a href="https://markets.ft.com/data/equities/tearsheet/summary?s=ALRT:LSE" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;">📰 FT Markets</a>
+      <a href="https://www.londonstockexchange.com/stock/ALRT/defence-holdings/company-page" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;">🏛️ LSE Company Page</a>
+      <a href="https://www.investegate.co.uk/ArticleList.aspx?id=ALRT" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#161b22;border:1px solid #30363d;color:#c9d1d9;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;">📋 RNS Feed</a>
+      <a href="https://t.me/+m6p7j7UervQ4OWY0" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#229ED9;border:1px solid #229ED9;color:#fff;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;font-weight:700;">✈️ Join Telegram Group</a>
+      <a href="https://buymeacoffee.com/stuartw" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#ffdd00;border:1px solid #ffdd00;color:#000;padding:7px 13px;border-radius:20px;font-size:12px;text-decoration:none;font-weight:700;">☕ Buy Me a Coffee</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Update timestamp
+  document.addEventListener('DOMContentLoaded', () => {
+    const els = document.querySelectorAll('.live-time');
+    const now = new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+    els.forEach(el => el.textContent = now);
+  });
+</script>
+
+</body>
+</html>
